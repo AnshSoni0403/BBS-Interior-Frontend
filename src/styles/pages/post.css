@@ -1,0 +1,235 @@
+/* ==========================================================================
+   Journal post (/journal/:slug)
+   ========================================================================== */
+
+.post-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 950;
+  background: var(--brass);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  pointer-events: none;
+}
+
+/* ---------- hero ---------- */
+
+.post-hero {
+  padding-top: clamp(140px, 18vw, 220px);
+}
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.8rem;
+}
+.post-meta__cat { color: var(--brass); font-weight: 600; }
+.post-hero__title {
+  font-size: clamp(2.6rem, 6.4vw, 6.6rem);
+  max-width: 15ch;
+  line-height: 0.98;
+}
+.post-hero__excerpt { margin-top: 2rem; max-width: 40em; }
+
+.post-hero__media-wrap { margin-top: clamp(48px, 7vw, 100px); }
+.post-hero__media {
+  height: clamp(320px, 78vh, 860px);
+  overflow: hidden;
+  border-radius: 6px;
+  will-change: clip-path;
+}
+.post-hero__media .parallax,
+.post-hero__media img { width: 100%; height: 100%; object-fit: cover; }
+.post-hero__media .parallax { overflow: hidden; }
+
+/* ---------- layout ---------- */
+
+.post-layout {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) minmax(0, 66ch) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 64px);
+  padding: clamp(64px, 9vw, 130px) 0 var(--section);
+}
+.post-aside {
+  position: sticky;
+  top: 120px;
+  align-self: start;
+  display: grid;
+  gap: 2.5rem;
+  justify-items: start;
+}
+
+.post-body {
+  font-size: clamp(1.06rem, 1.2vw, 1.2rem);
+  line-height: 1.85;
+  color: var(--walnut);
+  display: grid;
+  gap: 1.6em;
+  min-width: 0;
+}
+.post-body > p { max-width: 66ch; }
+
+.post-body__first::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 5.6em;
+  line-height: 0.78;
+  margin: 0.08em 0.14em 0 -0.04em;
+  color: var(--brass);
+}
+.post-body__first::first-line {
+  color: var(--espresso);
+  font-weight: 500;
+}
+
+/* ---------- pull quote ---------- */
+
+.post-pull {
+  margin: 1.4em 0;
+  padding: 0;
+  display: grid;
+  gap: 1.4rem;
+}
+@media (min-width: 1100px) {
+  .post-pull { margin-right: -14ch; }
+}
+.post-pull__rule {
+  display: block;
+  width: 120px;
+  height: 1px;
+  background: var(--brass);
+  transform-origin: left;
+}
+.post-pull__text {
+  margin: 0;
+  font-size: clamp(2rem, 3.6vw, 3.4rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--espresso);
+}
+.post-pull figcaption { color: var(--brass); }
+
+/* ---------- sign-off ---------- */
+
+.post-sign {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  padding-top: 2rem;
+  margin-top: 1rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.95rem;
+}
+.post-sign__mark { color: var(--brass); font-size: 1.4rem; }
+.post-sign__link {
+  color: var(--espresso);
+  background: linear-gradient(var(--brass), var(--brass)) 0 100% / 100% 1px no-repeat;
+  transition: background-size 0.6s var(--ease), color 0.4s var(--ease);
+}
+.post-sign__link:hover { color: var(--brass); background-size: 0 1px; background-position: 100% 100%; }
+
+/* ---------- share ---------- */
+
+.post-share { display: grid; gap: 1rem; }
+.post-share__row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.post-aside .post-share__row { flex-direction: column; align-items: flex-start; }
+.post-share__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: background 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+.post-share__btn:hover { background: var(--espresso); color: var(--ivory); border-color: var(--espresso); }
+.post-share__btn.is-copied { background: var(--brass); border-color: var(--brass); color: var(--paper); }
+
+.post-share--mobile { display: none; }
+
+/* ---------- related ---------- */
+
+.post-related__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(40px, 6vw, 80px);
+}
+.post-related__title { font-size: var(--fs-h2); margin-top: 1.4rem; }
+
+.post-related__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 44px);
+}
+.post-card { display: grid; gap: 1rem; }
+.post-card__media {
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 999px 999px var(--radius) var(--radius);
+}
+.post-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.4s var(--ease);
+}
+.post-card:hover .post-card__media img { transform: scale(1.07); }
+.post-card__meta {
+  display: flex;
+  gap: 0.6rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.4rem;
+}
+.post-card__meta span:first-child { color: var(--brass); font-weight: 600; }
+.post-card__title { font-size: clamp(1.5rem, 2.2vw, 2.1rem); line-height: 1.08; }
+.post-card__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+  opacity: 0.6;
+  transition: opacity 0.4s var(--ease), gap 0.5s var(--ease);
+}
+.post-card:hover .post-card__more { opacity: 1; gap: 0.8rem; }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 1100px) {
+  .post-layout { grid-template-columns: 200px minmax(0, 1fr); }
+}
+@media (max-width: 860px) {
+  .post-layout { grid-template-columns: minmax(0, 1fr); }
+  .post-aside { position: static; }
+  .post-aside .post-share { display: none; }
+  .post-share--mobile { display: block; margin-top: 1rem; }
+  .post-related__grid { grid-template-columns: minmax(0, 1fr); }
+  .post-card__media { aspect-ratio: 5 / 4; }
+}
+@media (min-width: 600px) and (max-width: 860px) {
+  .post-related__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
